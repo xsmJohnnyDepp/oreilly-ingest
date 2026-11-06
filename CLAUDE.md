@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-O'Reilly book ingest tool using a microkernel architecture. Converts books to LLM-ready formats (Markdown, JSON, TOON, plain text) for AI interaction. Also supports PDF and EPUB 3. Python 3.10+, vanilla Python with minimal dependencies. There is no automated test suite or linter configured in this repo — verify changes by running the server and exercising the affected plugin/endpoint directly.
+O'Reilly book ingest tool using a microkernel architecture. Converts books to LLM-ready formats (Markdown, JSON, TOON, plain text) for AI interaction. Also supports PDF and EPUB 3. Python 3.10+, vanilla Python with minimal dependencies. Unit tests live in `tests/` (stdlib `unittest`); no linter is configured. Run the tests after plugin changes, and verify web/endpoint changes by running the server and exercising them directly.
 
 ## Commands
 
@@ -26,6 +26,9 @@ docker compose up -d              # Builds image, mounts ./data (cookies) and ./
 # token expires in ~15 min, so this is the normal way to re-auth)
 python scripts/refresh_cookies.py
 python scripts/refresh_cookies.py --watch     # re-sync every 60s
+
+# Tests (stdlib unittest; run from the repo root)
+.venv/bin/python -m unittest discover -s tests -v
 ```
 
 ## Architecture
